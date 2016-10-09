@@ -1,15 +1,43 @@
 #include "roundgauge.h"
 #include <cmath>
 
-RoundGauge::RoundGauge(QWidget *parent)
-     : QWidget(parent, Qt::FramelessWindowHint), measurement_(), minValue_(0), maxValue_(4500), nominalValue_(1800), criticalValue_(3000), minAngle_(60), maxAngle_(300), ticsInterval_(250)
+RoundGauge::RoundGauge(HelmWidget *parent)
+     : HelmWidget(parent), measurement_(), minValue_(0), maxValue_(4500), nominalValue_(1800), criticalValue_(3000), minAngle_(60), maxAngle_(300), ticsInterval_(250)
 {
     setWindowTitle(tr("Gauge"));
-    resize(200, 200);
     decimalPlaces_ = 0;
 
 }
 
+void RoundGauge::saveSettings(){
+
+    HelmWidget::saveSettings();
+
+    QSettings settings("helm.ini", QSettings::IniFormat);
+    settings.beginGroup(name_);
+
+    settings.setValue("max", maxValue_);
+    settings.setValue("min", minValue_);
+    settings.setValue("critical", criticalValue_);
+    settings.setValue("nominal", nominalValue_);
+    settings.setValue("tics_interval", ticsInterval_);
+    settings.setValue("decimal_places", decimalPlaces_);
+}
+
+
+void RoundGauge::readSettings(){
+    HelmWidget::readSettings();
+
+    QSettings settings("helm.ini", QSettings::IniFormat);
+
+    settings.beginGroup(name_);
+    setMax(settings.value("max").toDouble());
+    setMin(settings.value("min").toDouble());
+    setCritical(settings.value("critical").toDouble());
+    setNominal(settings.value("nominal").toDouble());
+    setTicsInterval(settings.value("tics_interval").toDouble());
+    setDecimalPlaces(settings.value("decimal_places").toDouble());
+}
 
 void RoundGauge::registerPublisher(QObject* o)
 {

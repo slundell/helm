@@ -6,9 +6,10 @@
 #include <QDebug>
 #include <QPainter>
 
+#include "helmwidget.h"
 #include "measurement.h"
 
-class RoundGauge : public QWidget
+class RoundGauge : public HelmWidget
 {
     Q_OBJECT
 protected:
@@ -28,7 +29,7 @@ protected:
     int x_;
     int y_;
 public:
-    RoundGauge(QWidget * parent=0);
+    RoundGauge(HelmWidget * parent=0);
 
     virtual void setMin(double min) {minValue_=min;}
     virtual void setMax(double max) {maxValue_=max;}
@@ -47,6 +48,9 @@ public:
     virtual void setX(int x){ x_=x; move(x_,y_);}
     virtual void setY(int y){ y_=y; move(x_,y_);}
     virtual void setXY(int x, int y){ x_=x; y_=y; move(x_,y_);}
+
+    virtual void saveSettings();
+    virtual void readSettings();
 
 
 protected:

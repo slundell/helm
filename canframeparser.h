@@ -2,16 +2,16 @@
 #define CANFRAMEPARSER_H
 
 #include <QObject>
+#include "volvomessage.h"
 
 class CANFrameParser : public QObject
 {
     Q_OBJECT
+
 public:
     explicit CANFrameParser(QObject *parent = 0);
+    virtual QVector<Measurement> parse(const QCanBusFrame&) = 0; //pure virtual
 
-signals:
-
-public slots:
 };
 
 #endif // CANFRAMEPARSER_H

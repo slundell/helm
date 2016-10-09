@@ -25,7 +25,8 @@ SOURCES += main.cpp \
     sleekroundgauge.cpp \
     sleekdoublegauge.cpp \
     volvomessage.cpp \
-    canreader.cpp
+    canreader.cpp \
+    helmwidget.cpp
 HEADERS += mainwindow.h \
     rowreader.h \
     lineparser.h \
@@ -47,7 +48,8 @@ HEADERS += mainwindow.h \
     sleekroundgauge.h \
     sleekdoublegauge.h \
     volvomessage.h \
-    canreader.h
+    canreader.h \
+    helmwidget.h
 FORMS += mainwindow.ui
 
 QT += widgets

@@ -1,6 +1,6 @@
 #include "sleekroundgauge.h"
 
-SleekRoundGauge::SleekRoundGauge(QWidget *parent) : RoundGauge(parent)
+SleekRoundGauge::SleekRoundGauge(HelmWidget *parent) : RoundGauge(parent)
 {
     nominalTicsInterval_ = 1; //if not a positive value, the for-loop below will be infinite
     scaleColor_ = QColor(255, 255, 255);
