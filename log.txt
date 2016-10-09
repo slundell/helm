@@ -1,3 +1,0 @@
-AT AL
-OK>AT MA
-ELM327 v1.3a>
