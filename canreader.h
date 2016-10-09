@@ -9,36 +9,35 @@
 #include "measurement.h"
 #include "volvomessage.h"
 
-class CANReader : public QThread
+class CANReader : public QObject
 {
     Q_OBJECT
 
 
 protected:
-    VolvoMessage vm_;
-
-//    CANFrameParser* parser_;
+    QCanBusDevice* device_;
+    CANFrameParser* parser_;
 //    QFile logFile_;
 //    QTextStream logStream_;
 //    bool  useLogging_;
-    virtual void open();
-    virtual void close();
-    virtual void run();
-
-    /*
-    QStringList receive(unsigned int);
-*/
 
 public:
     CANReader();
-/*
-    virtual void setBaud(int);
-    virtual void run();
+    virtual void open(QString);
+    virtual void close();
+
+//    virtual void setBaud(int);
+
     virtual void setParser(CANFrameParser*);
-    virtual void enableLogging(QString);
-    */
+//    virtual void enableLogging(QString);
+
 
 signals:
+    void notify(Measurement); //TODO: const&
+
+public slots:
+    void receiveFrames();
+
 
 };
 

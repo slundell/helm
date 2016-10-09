@@ -6,12 +6,18 @@
 class VPD3CANFrameParser : public CANFrameParser
 {
     Q_OBJECT
+
+protected:
+    VolvoMessage vm_;
+    QString subject_;
+
+    QVector<Measurement> parseVolvoMessage(const VolvoMessage&);
 public:
     explicit VPD3CANFrameParser();
+    QVector<Measurement> parse(const QCanBusFrame&);
+    virtual void setSubject(const QString&);
 
 signals:
-
-public slots:
 };
 
 #endif // VPD3CANPARSER_H

@@ -6,42 +6,42 @@
 
 VPD3OBD2Parser::VPD3OBD2Parser()
 {
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 21,  0, 3,  "ECU-temperatur: Sp‰nningen ˆverskrider normalv‰rde eller ‰r kortsluten mot hˆgre sp‰nning."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 21,  0, 4,  "ECU-temperatur: Sp‰nningen underskrider normalv‰rde eller ‰r kortsluten mot batteriminus."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 21,  0, 3,  "ECU-temperatur: Sp√§nningen √∂verskrider normalv√§rde eller √§r kortsluten mot h√∂gre sp√§nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 21,  0, 4,  "ECU-temperatur: Sp√§nningen underskrider normalv√§rde eller √§r kortsluten mot batteriminus."));
     
     errorCodes_.push_back(new ErrorCode(0x00000000, 128, 43,  0, 11, "Start switch status: Fel har uppkommit under initieringen av motorstyrenheten."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 91,  0, 3,  "Trottelreglageposition: Sp‰nningen ˆverskrider normalv‰rde eller ‰r kortsluten mot hˆgre sp‰nning."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 91,  0, 4,  "Trottelreglageposition: Sp‰nningen underskrider normalv‰rde eller ‰r kortsluten mot batteriminus."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 91,  0, 3,  "Trottelreglageposition: Sp√§nningen √∂verskrider normalv√§rde eller √§r kortsluten mot h√∂gre sp√§nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 91,  0, 4,  "Trottelreglageposition: Sp√§nningen underskrider normalv√§rde eller √§r kortsluten mot batteriminus."));
     errorCodes_.push_back(new ErrorCode(0x00000000, 128, 91,  0, 11, "Trottelreglageposition: Icke identifierbart fel."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 97,  0, 0,  "Vatten i br‰nslet."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 97,  0, 0,  "Vatten i br√§nslet."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 100, 0, 1,  "Oljetryck (motor): Oljetrycket fˆr lÂgt."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 100, 0, 1,  "Oljetryck (motor): Oljetrycket f√∂r l√•gt."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 102, 0, 3,  "Laddlufttryck: Sp‰nningen ˆverskrider normalv‰rde eller ‰r kortsluten mot hˆgre sp‰nning."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 102, 0, 4,  "Laddlufttryck: Sp‰nningen underskrider normalv‰rde eller ‰r kortsluten mot batteriminus."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 102, 0, 3,  "Laddlufttryck: Sp√§nningen √∂verskrider normalv√§rde eller √§r kortsluten mot h√∂gre sp√§nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 102, 0, 4,  "Laddlufttryck: Sp√§nningen underskrider normalv√§rde eller √§r kortsluten mot batteriminus."));
     errorCodes_.push_back(new ErrorCode(0x00000000, 128, 102, 0, 11, "Laddlufttryck: Icke identifierbart fel."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 105, 0, 3,  "Laddlufttemperatur: Sp‰nningen ˆverskrider normalv‰rde eller ‰r kortsluten mot hˆgre sp‰nning."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 105, 0, 4,  "Laddlufttemperatur: Sp‰nningen underskrider normalv‰rde eller ‰r kortsluten mot batteriminus."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 105, 0, 3,  "Laddlufttemperatur: Sp√§nningen √∂verskrider normalv√§rde eller √§r kortsluten mot h√∂gre sp√§nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 105, 0, 4,  "Laddlufttemperatur: Sp√§nningen underskrider normalv√§rde eller √§r kortsluten mot batteriminus."));
     errorCodes_.push_back(new ErrorCode(0x00000000, 128, 105, 0, 11, "Laddlufttemperatur: Icke identifierbart fel."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 108, 0, 3,  "Atmosf‰rstryck: Sp‰nningen ˆverskrider normalv‰rde eller ‰r kortsluten mot hˆgre sp‰nning."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 108, 0, 4,  "Atmosf‰rstryck: Sp‰nningen underskrider normalv‰rde eller ‰r kortsluten mot batteriminus."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 108, 0, 3,  "Atmosf√§rstryck: Sp√§nningen √∂verskrider normalv√§rde eller √§r kortsluten mot h√∂gre sp√§nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 108, 0, 4,  "Atmosf√§rstryck: Sp√§nningen underskrider normalv√§rde eller √§r kortsluten mot batteriminus."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 110, 0, 0,  "Kylv‰tsketemperatur: Givarv‰rdet ‰r giltigt men ˆverskrider normalt arbetsomrÂde."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 110, 0, 3,  "Kylv‰tsketemperatur: Sp‰nningen ˆverskrider normalv‰rde eller ‰r kortsluten mot hˆgre sp‰nning."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 110, 0, 4,  "Kylv‰tsketemperatur: Sp‰nningen underskrider normalv‰rde eller ‰r kortsluten mot batteriminus."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 110, 0, 0,  "Kylv√§tsketemperatur: Givarv√§rdet √§r giltigt men √∂verskrider normalt arbetsomr√•de."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 110, 0, 3,  "Kylv√§tsketemperatur: Sp√§nningen √∂verskrider normalv√§rde eller √§r kortsluten mot h√∂gre sp√§nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 110, 0, 4,  "Kylv√§tsketemperatur: Sp√§nningen underskrider normalv√§rde eller √§r kortsluten mot batteriminus."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 158, 0, 1,  "Batterisp‰nning: Givarv‰rdet ‰r giltigt men underskrider normalt arbetsomrÂde."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 158, 0, 1,  "Batterisp√§nning: Givarv√§rdet √§r giltigt men underskrider normalt arbetsomr√•de."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 164, 0, 2,  "Br‰nsletryck: Intermittenta eller felaktiga data."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 164, 0, 3,  "Br‰nsletryck: Sp‰nningen ˆverskrider normalv‰rde eller ‰r kortsluten mot hˆgre sp‰nning."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 164, 0, 4,  "Br‰nsletryck: Sp‰nningen underskrider normalv‰rde eller ‰r kortsluten mot batteriminus."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 164, 0, 11, "Br‰nsletryck: Icke identifierbart fel."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 164, 0, 2,  "Br√§nsletryck: Intermittenta eller felaktiga data."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 164, 0, 3,  "Br√§nsletryck: Sp√§nningen √∂verskrider normalv√§rde eller √§r kortsluten mot h√∂gre sp√§nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 164, 0, 4,  "Br√§nsletryck: Sp√§nningen underskrider normalv√§rde eller √§r kortsluten mot batteriminus."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 164, 0, 11, "Br√§nsletryck: Icke identifierbart fel."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 190, 0, 3,  "Motorvarvtal: Sp‰nningen ˆverskrider normalv‰rde eller ‰r kortsluten mot hˆgre sp‰nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 190, 0, 3,  "Motorvarvtal: Sp√§nningen √∂verskrider normalv√§rde eller √§r kortsluten mot h√∂gre sp√§nning."));
     errorCodes_.push_back(new ErrorCode(0x00000000, 128, 190, 0, 11, "Motorvarvtal: Icke identifierbart fel."));
     
     errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 1, 11, "Enhetsinjektor nr 1: Icke identifierbart fel."));
@@ -51,79 +51,79 @@ VPD3OBD2Parser::VPD3OBD2Parser()
     errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 5, 11, "Enhetsinjektor nr 5: Icke identifierbart fel."));
     
     errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 21, 11, "Varvtalsgivare, kamaxel: Icke identifierbart fel."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 22, 11, "Varvtalsgivare, sv‰nghjul: Icke identifierbart fel."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 22, 11, "Varvtalsgivare, sv√§nghjul: Icke identifierbart fel."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 27, 0,  "VNT-ventil: Givarv‰rdet ‰r giltigt men ˆverskrider normalt arbetsomrÂde."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 27, 0,  "VNT-ventil: Givarv√§rdet √§r giltigt men √∂verskrider normalt arbetsomr√•de."));
     errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 27, 11, "VNT-ventil: Icke identifierbart fel."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 211, 3, "Sp‰nningsmatning, givare 2: Sp‰nningen ˆverskrider normalv‰rde eller ‰r kortsluten mot hˆgre sp‰nning"));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 211, 4, "Sp‰nningsmatning, givare 2: Sp‰nningen underskrider normalv‰rde eller ‰r kortsluten mot batteriminus."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 211, 3, "Sp√§nningsmatning, givare 2: Sp√§nningen √∂verskrider normalv√§rde eller √§r kortsluten mot h√∂gre sp√§nning"));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 211, 4, "Sp√§nningsmatning, givare 2: Sp√§nningen underskrider normalv√§rde eller √§r kortsluten mot batteriminus."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 212, 3, "Sp‰nningsmatning, givare 1: Sp‰nningen ˆverskrider normalv‰rde eller ‰r kortsluten mot hˆgre sp‰nning"));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 212, 4, "Sp‰nningsmatning, givare 1: Sp‰nningen underskrider normalv‰rde eller ‰r kortsluten mot batteriminus."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 212, 3, "Sp√§nningsmatning, givare 1: Sp√§nningen √∂verskrider normalv√§rde eller √§r kortsluten mot h√∂gre sp√§nning"));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 212, 4, "Sp√§nningsmatning, givare 1: Sp√§nningen underskrider normalv√§rde eller √§r kortsluten mot batteriminus."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 218, 11, "ECM huvudrel‰: Icke identifierbart fel."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 218, 11, "ECM huvudrel√§: Icke identifierbart fel."));
     
     errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 213, 11, "Kommunikationsfel J1939: Icke identifierbart fel."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 232, 11, "5 Volt DC Matarsp‰nning: Icke identifierbart fel."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 232, 11, "5 Volt DC Matarsp√§nning: Icke identifierbart fel."));
     
     errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 253, 12, "Datasats minne EEPROM: Felaktig komponent."));
     
     errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 254, 11, "Motorstyrenhet: Icke identifierbart fel."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 50, 11,  "Br‰nsletrycksˆvervakning MPROP: Icke identifierbart fel."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 50, 11,  "Br√§nsletrycks√∂vervakning MPROP: Icke identifierbart fel."));
 
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 54, 3,  "Booster-sp‰nning (High bank 1): Sp‰nningen ˆverskrider normalv‰rde eller ‰r kortsluten mot hˆgre sp‰nning."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 54, 4,  "Booster-sp‰nning (High bank 1): Sp‰nningen underskrider normalv‰rde eller ‰r kortsluten mot batteriminus."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 54, 11, "Booster-sp‰nning (High bank 1): Icke identifierbart fel."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 54, 3,  "Booster-sp√§nning (High bank 1): Sp√§nningen √∂verskrider normalv√§rde eller √§r kortsluten mot h√∂gre sp√§nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 54, 4,  "Booster-sp√§nning (High bank 1): Sp√§nningen underskrider normalv√§rde eller √§r kortsluten mot batteriminus."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 54, 11, "Booster-sp√§nning (High bank 1): Icke identifierbart fel."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 55, 3,  "Booster-sp‰nning (High bank 2): Sp‰nningen ˆverskrider normalv‰rde eller ‰r kortsluten mot hˆgre sp‰nning."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 55, 4,  "Booster-sp‰nning (High bank 2): Sp‰nningen underskrider normalv‰rde eller ‰r kortsluten mot batteriminus."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 55, 11, "Booster-sp‰nning (High bank 2): Icke identifierbart fel."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 55, 3,  "Booster-sp√§nning (High bank 2): Sp√§nningen √∂verskrider normalv√§rde eller √§r kortsluten mot h√∂gre sp√§nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 55, 4,  "Booster-sp√§nning (High bank 2): Sp√§nningen underskrider normalv√§rde eller √§r kortsluten mot batteriminus."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 55, 11, "Booster-sp√§nning (High bank 2): Icke identifierbart fel."));
     
     errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 56, 11, "System startup test for shutoff path: Icke identifierbart fel."));
     
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 70, 3,  "Br‰nsletrycksˆvervakning 1: Br‰nsletrycket fˆr hˆgt. Flˆdesˆvervakning, negativ avvikelse."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 70, 4,  "Br‰nsletrycksˆvervakning 1: Br‰nsletrycket fˆr lÂgt. Flˆdesˆvervakning, positiv avvikelse."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 70, 11, "Br‰nsletrycksˆvervakning 1: Br‰nsletrycksfel."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 70, 3,  "Br√§nsletrycks√∂vervakning 1: Br√§nsletrycket f√∂r h√∂gt. Fl√∂des√∂vervakning, negativ avvikelse."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 70, 4,  "Br√§nsletrycks√∂vervakning 1: Br√§nsletrycket f√∂r l√•gt. Fl√∂des√∂vervakning, positiv avvikelse."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 70, 11, "Br√§nsletrycks√∂vervakning 1: Br√§nsletrycksfel."));
 
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 71, 4,  "Br‰nsletrycksˆvervakning 2: Uppt‰ckt av l‰ckage."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 71, 11, "Br‰nsletrycksˆvervakning 2: Uppt‰ckt av smÂ l‰ckage / Flˆdesˆvervakning i tomgÂng."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 71, 4,  "Br√§nsletrycks√∂vervakning 2: Uppt√§ckt av l√§ckage."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 128, 0, 71, 11, "Br√§nsletrycks√∂vervakning 2: Uppt√§ckt av sm√• l√§ckage / Fl√∂des√∂vervakning i tomg√•ng."));
 
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 96, 1, "Br‰nslenivÂ: Datav‰rde normalt men under normalt arbetsomrÂde.."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 96, 3, "Br‰nslenivÂ: Onormalt hˆg sp‰nning eller kortslutning mot hˆgre sp‰nning."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 96, 4, "Br‰nslenivÂ: Onormalt lÂg sp‰nning eller kortslutning mot l‰gre sp‰nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 96, 1, "Br√§nsleniv√•: Datav√§rde normalt men under normalt arbetsomr√•de.."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 96, 3, "Br√§nsleniv√•: Onormalt h√∂g sp√§nning eller kortslutning mot h√∂gre sp√§nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 96, 4, "Br√§nsleniv√•: Onormalt l√•g sp√§nning eller kortslutning mot l√§gre sp√§nning."));
 
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 289, 3, "Powertrim-strˆmbrytare: Onormalt hˆg sp‰nning eller kortslutning mot hˆgre sp‰nning."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 289, 4, "Powertrim-strˆmbrytare: Onormalt lÂg sp‰nning eller kortslutning mot l‰gre sp‰nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 289, 3, "Powertrim-str√∂mbrytare: Onormalt h√∂g sp√§nning eller kortslutning mot h√∂gre sp√§nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 289, 4, "Powertrim-str√∂mbrytare: Onormalt l√•g sp√§nning eller kortslutning mot l√§gre sp√§nning."));
 
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 290, 3, "Powertrim-signal eller -matning: Onormalt hˆg sp‰nning eller kortslutning mot hˆgre sp‰nning."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 290, 4, "Powertrim-signal eller -matning: Onormalt lÂg sp‰nning eller kortslutning mot l‰gre sp‰nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 290, 3, "Powertrim-signal eller -matning: Onormalt h√∂g sp√§nning eller kortslutning mot h√∂gre sp√§nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 290, 4, "Powertrim-signal eller -matning: Onormalt l√•g sp√§nning eller kortslutning mot l√§gre sp√§nning."));
 
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 395, 4, "Instrumentmatning: Onormalt lÂg sp‰nning eller kortslutning mot l‰gre sp‰nning."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 395, 6, "Instrumentmatning: Onormalt hˆg strˆm eller kortslutning till batteriets minusledare."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 395, 4, "Instrumentmatning: Onormalt l√•g sp√§nning eller kortslutning mot l√§gre sp√§nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 395, 6, "Instrumentmatning: Onormalt h√∂g str√∂m eller kortslutning till batteriets minusledare."));
 
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 396, 5, "Tillbehˆrsstrˆmfˆrsˆrjning (synk): Onormalt lÂg strˆm eller avbrott."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 396, 6, "Tillbehˆrsstrˆmfˆrsˆrjning (synk): Onormalt hˆg strˆm eller kortslutning till batteriets minusledare."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 396, 5, "Tillbeh√∂rsstr√∂mf√∂rs√∂rjning (synk): Onormalt l√•g str√∂m eller avbrott."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 396, 6, "Tillbeh√∂rsstr√∂mf√∂rs√∂rjning (synk): Onormalt h√∂g str√∂m eller kortslutning till batteriets minusledare."));
 
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 410, 1, "Djuplarm: Datav‰rde normalt men under normalt arbetsomrÂde."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 410, 1, "Djuplarm: Datav√§rde normalt men under normalt arbetsomr√•de."));
 
     errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 231, 2,  "J1939 Kommunikationsvarning / -fel: Intermitenta eller felaktiga data."));
     errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 231, 9,  "J1939 Kommunikationsvarning / -fel: Onormal uppdateringshastighet."));
     errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 231, 11, "J1939 Kommunikationsvarning / -fel: Oidentifierbart fel."));
 
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 253, 12, "Fel pÂ kalibreringsminne: Felaktig enhet eller komponent."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 253, 12, "Fel p√• kalibreringsminne: Felaktig enhet eller komponent."));
 
     errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 254, 12, "Internt CPU-fel: Felaktig enhet eller komponent."));
 
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 11, 3,   "Crank switch (nyckelstart): Onormalt hˆg sp‰nning eller kortslutning mot hˆgre sp‰nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 11, 3,   "Crank switch (nyckelstart): Onormalt h√∂g sp√§nning eller kortslutning mot h√∂gre sp√§nning."));
 
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 30, 3,   "Powertrimmotor uppÂt: Onormalt hˆg sp‰nning eller kortslutning mot hˆgre sp‰nning."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 30, 4,   "Powertrimmotor uppÂt: Onormalt lÂg sp‰nning eller kortslutning mot l‰gre sp‰nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 30, 3,   "Powertrimmotor upp√•t: Onormalt h√∂g sp√§nning eller kortslutning mot h√∂gre sp√§nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 30, 4,   "Powertrimmotor upp√•t: Onormalt l√•g sp√§nning eller kortslutning mot l√§gre sp√§nning."));
 
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 31, 3,   "Powertrimmotor nedÂt: Onormalt hˆg sp‰nning eller kortslutning mot hˆgre sp‰nning."));
-    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 31, 4,   "Powertrimmotor nedÂt: Onormalt lÂg sp‰nning eller kortslutning mot l‰gre sp‰nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 31, 3,   "Powertrimmotor ned√•t: Onormalt h√∂g sp√§nning eller kortslutning mot h√∂gre sp√§nning."));
+    errorCodes_.push_back(new ErrorCode(0x00000000, 140, 0, 31, 4,   "Powertrimmotor ned√•t: Onormalt l√•g sp√§nning eller kortslutning mot l√§gre sp√§nning."));
 }
 
 quint8 VPD3OBD2Parser::charHexToUInt(QString charHex){

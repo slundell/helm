@@ -20,7 +20,7 @@ protected:
     virtual void paintEvent(QPaintEvent *event);
 
 public:
-    SleekRoundGauge(QWidget * parent=0);
+    SleekRoundGauge(HelmWidget * parent=0);
     virtual void setNominalTicsInterval(double nti) { nominalTicsInterval_ = nti; }
 };
 

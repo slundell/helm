@@ -1,8 +1,9 @@
 #include "sleekdoublegauge.h"
 
-SleekDoubleGauge::SleekDoubleGauge(QWidget *parent) : SleekRoundGauge(parent)
+SleekDoubleGauge::SleekDoubleGauge(HelmWidget *parent) : SleekRoundGauge(parent)
 {
     maxAngle_=180;
+
     update();
 }
 
@@ -38,7 +39,7 @@ void SleekDoubleGauge::paintEvent(QPaintEvent *)
     if (var.canConvert<double>()){
         valLeft = var.toDouble();
     } else {
-        qDebug() << "Not a double value";
+        qDebug() << "Not a double value" << valLeft;
         disableLeft = true;
     }
 
@@ -49,7 +50,7 @@ void SleekDoubleGauge::paintEvent(QPaintEvent *)
     if (var.canConvert<double>()){
         valRight = var.toDouble();
     } else {
-        qDebug() << "Not a double value";
+        qDebug() << "Not a double value" << valRight;
         disableRight = true;
     }
 
@@ -222,43 +223,40 @@ void SleekDoubleGauge::paintEvent(QPaintEvent *)
      pen.setColor(textColor_);
      painter.setPen(pen);
 
-     QFont font = painter.font();
-     font.setPixelSize(56);
-     font.fromString(fontString_);
-     font.setItalic(true);
-     painter.setFont(font);
+
 
      double val;
      if ((!disableLeft) && (!disableRight)){
-         val = (valLeft + valRight ) / 2;
+         if (!(((valLeft / valRight) > 1.25) || (valRight / valLeft) > 1.25)){
+             val = (valLeft + valRight ) / 2;
 
 
-         double diffPct;
-         if (val == 0){
-            diffPct = 0;
-         } else {
-            diffPct = 100 * (valLeft - valRight ) / val;
-         }
+             double diffPct;
+             if (val == 0){
+                diffPct = 0;
+             } else {
+                diffPct = 100 * (valLeft - valRight ) / val;
+             }
 
-         double maxIndicatorPct = 25;
-         double diffAngle = 90 * diffPct/maxIndicatorPct;
+             double maxIndicatorPct = 25;
+             double diffAngle = 90 * diffPct/maxIndicatorPct;
 
-         if (diffAngle > 90)  diffAngle =  90;
-         if (diffAngle < -90) diffAngle = -90;
-         painter.save();
+             if (diffAngle > 90)  diffAngle =  90;
+             if (diffAngle < -90) diffAngle = -90;
+             painter.save();
 
-         QTransform transform;
-         transform.translate(width() / 2, height() / 2);
-         transform.scale(side / 200.0, side / 200.0);
-         transform.translate(0, -40);
-         transform.rotate(diffAngle);
-         painter.setTransform(transform);
-         painter.drawLine(-20, 0, 20, 0);
-         painter.setBrush(scaleColor_);
-         painter.drawEllipse(QPoint(-20, 0), 2, 2);
-         painter.drawEllipse(QPoint(+20, 0), 2, 2);
-         painter.restore();
-
+             QTransform transform;
+             transform.translate(width() / 2, height() / 2);
+             transform.scale(side / 200.0, side / 200.0);
+             transform.translate(0, -40);
+             transform.rotate(diffAngle);
+             painter.setTransform(transform);
+             painter.drawLine(-20, 0, 20, 0);
+             painter.setBrush(scaleColor_);
+             painter.drawEllipse(QPoint(-20, 0), 2, 2);
+             painter.drawEllipse(QPoint(+20, 0), 2, 2);
+             painter.restore();
+        }
          //qDebug() << diffPct;
     } else {
         if (disableLeft) {
@@ -269,22 +267,49 @@ void SleekDoubleGauge::paintEvent(QPaintEvent *)
         }
     }
 
-     QString t;
-     QString formatString = QString("%.") + QString::number(decimalPlaces_) + "f";
-     QByteArray ba = formatString.toLatin1();
-     const char *formatCharArr = ba.data();
-     t = t.asprintf(formatCharArr, val);
-     //qDebug() << t;
-     painter.drawText(-80,-60,160,120, (Qt::AlignVCenter | Qt::AlignHCenter), t);
+    if (((valLeft / valRight) > 1.25) || (valRight / valLeft) > 1.25){
+        QFont font = painter.font();
+        font.setPixelSize(32);
+        font.fromString(fontString_);
+        font.setItalic(true);
+        painter.setFont(font);
 
+        QString t;
+        QString formatString = QString("%.") + QString::number(decimalPlaces_) + "f";
+        QByteArray ba = formatString.toLatin1();
+        const char *formatCharArr = ba.data();
+        t = t.asprintf(formatCharArr, valLeft);
+        painter.drawText(-60,-35,120,70, (Qt::AlignLeft | Qt::AlignTop), t);
 
+        formatString = QString("%.") + QString::number(decimalPlaces_) + "f";
+        ba = formatString.toLatin1();
+        formatCharArr = ba.data();
+        t = t.asprintf(formatCharArr, valRight);
+        painter.drawText(-60,-35,120,70, (Qt::AlignRight | Qt::AlignBottom), t);
+
+    } else {
+       QFont font = painter.font();
+       font.setPixelSize(56);
+       font.fromString(fontString_);
+       font.setItalic(true);
+       painter.setFont(font);
+       QString t;
+       QString formatString = QString("%.") + QString::number(decimalPlaces_) + "f";
+       QByteArray ba = formatString.toLatin1();
+       const char *formatCharArr = ba.data();
+       t = t.asprintf(formatCharArr, val);
+       painter.drawText(-80,-60,160,120, (Qt::AlignVCenter | Qt::AlignHCenter), t);
+    }
+    QFont font = painter.font();
      font.setPixelSize(16);
      font.fromString(fontString_);
      font.setItalic(false);
      painter.setFont(font);
 
-     t = measurement_.getUnit();
-     painter.drawText(-80,10,160,60, (Qt::AlignVCenter | Qt::AlignHCenter), t);
+     QString t = measurement_.getUnit();
+     painter.drawText(-80,0,160,60, (Qt::AlignVCenter | Qt::AlignHCenter), t);
 
+     t = measurement_.getType();
+     painter.drawText(-80,15,160,60, (Qt::AlignVCenter | Qt::AlignHCenter), t);
 
  }

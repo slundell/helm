@@ -5,7 +5,7 @@ CANReader::CANReader()
 {
 }
 
-void CANReader::open(){
+void CANReader::open(QString iface){
     bool supportsSocketCan = false;
     foreach (const QByteArray &backend, QCanBus::instance()->plugins()) {
         if (backend == "socketcan") {
@@ -17,38 +17,40 @@ void CANReader::open(){
         qDebug() << "No SocketCan support!";
         exit(1);
     }
+   device_ = QCanBus::instance()->createDevice("socketcan", iface);
+
+   if (!device_->connectDevice()){
+       qDebug() << "Unable to connect!";
+       qDebug() << device_->errorString();
+       exit(1);
+   } else {
+       connect(device_, &QCanBusDevice::framesReceived, this, &CANReader::receiveFrames);
+       qDebug() << "Connected";
+   }
 }
-void CANReader::close(){}
+
+void CANReader::close(){
+    //TODO: Close and disconnect
+}
+
+void CANReader::setParser(CANFrameParser* p){
+    parser_=p;
+}
 
 
-void CANReader::run(){
-/*
-    if (!open) open();
-    bool tryLastFrameAgain = false;
-    while (true){
-        if (tryLastFrameAgain || readPacket){
-           if (frame.frameType() != QCanBusFrame::ErrorFrame){
-               if (vm_.parseCANFrame(ReadCanBusFrame)){
-                       if (vm_.isComplete()){
-                           if (!vm_.hasErrorResponse())
-                                vpd3canparser_->parse(vm_);
-                           vm_.clear();
-                       }
-               } else {
+void CANReader::receiveFrames(){
+    //qDebug() << "CANReader::receiveFrames()";
 
-                   if (vm.size > 0)
-                        tryLastFrameAgain = true;
-
-                   vm_.clear();
-               }
+    QCanBusFrame frame;
+    if (sender()){ //check that we have a valid ptr
+        QCanBusDevice* device = (QCanBusDevice*)sender();
+        while (device->framesAvailable()){
+            frame = device->readFrame();
+            QVector<Measurement> m = parser_->parse(frame);
+            for (quint16 i=0; i< m.size(); ++i){
+                emit notify(m[i]);
             }
+
         }
-
-
-
-        usleep(1);
     }
-
-
-*/
 }

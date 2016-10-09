@@ -7,6 +7,9 @@
 #include "obd2reader.h"
 #include "nmeaparser.h"
 #include "roundgauge.h"
+#include "canreader.h"
+#include "canframeparser.h"
+#include "vpd3canframeparser.h"
 #include "sleekroundgauge.h"
 #include "sleekdoublegauge.h"
 #include "propslipcalculator.h"
@@ -66,43 +69,71 @@ int main(int argc, char *argv[])
     dtcBB.setWinTitle("DTC Babord");
     dtcBB.registerDTCResetter(&elmBB);*/
 
-    MeasurementGenerator mgBB(0, 4100, "Engine Port", "RPM", "RPM");
-    MeasurementGenerator mgSB(0, 4000, "Engine Starboard", "RPM", "RPM");
+
+    CANReader canReaderBB;
+    VPD3CANFrameParser canBBParser;
+    canBBParser.setSubject("Engine Port");
+    canReaderBB.setParser(&canBBParser);
+    canReaderBB.open("vcan0");
+
+    CANReader canReaderSB;
+    VPD3CANFrameParser canSBParser;
+    canSBParser.setSubject("Engine Starboard");
+    canReaderSB.setParser(&canSBParser);
+    canReaderSB.open("vcan1");
+
+
+    //MeasurementGenerator mgBB(1, 4100, "Engine Port", "RPM", "RPM");
+    //MeasurementGenerator mgSB(1, 4000, "Engine Starboard", "RPM", "RPM");
     //dispatch.registerPublisher(&mgBB);
 
     SleekDoubleGauge rpmBB;
-    rpmBB.registerPublisher(&mgBB);
-    rpmBB.registerPublisher(&mgSB);
-    rpmBB.setCritical(3500);
+    rpmBB.registerPublisher(&canReaderSB);
+    rpmBB.registerPublisher(&canReaderBB);
+    /*rpmBB.setCritical(3500);
     rpmBB.setNominal(3000);
     rpmBB.setMax(4000);
     rpmBB.setMin(0);
     rpmBB.setTicsInterval(250);
     rpmBB.setNominalTicsInterval(250);
-    rpmBB.setDecimalPlaces(0);
-    rpmBB.setTypeFilterLeft("RPM");
-    rpmBB.setTypeFilterRight("RPM");
+    rpmBB.setDecimalPlaces(0);*/
+    rpmBB.setTypeFilterLeft("Engine Speed");
+    rpmBB.setTypeFilterRight("Engine Speed");
 
     rpmBB.setSubjectFilterLeft("Engine Port");
     rpmBB.setSubjectFilterRight("Engine Starboard");
 
-
-    rpmBB.setXY(860,640);
-    rpmBB.resize(QSize(350, 350));
-
     rpmBB.show();
 
+
+
+    SleekDoubleGauge railpressure;
+    railpressure.registerPublisher(&canReaderBB);
+    railpressure.registerPublisher(&canReaderSB);
+    /*railpressure.setMax(2500);
+    railpressure.setMin(0);
+    railpressure.setTicsInterval(250);
+    railpressure.setNominalTicsInterval(250);
+    railpressure.setDecimalPlaces(0);*/
+    railpressure.setTypeFilterLeft("Rail Pressure");
+    railpressure.setTypeFilterRight("Rail Pressure");
+
+    railpressure.setSubjectFilterLeft("Engine Port");
+    railpressure.setSubjectFilterRight("Engine Starboard");
+    railpressure.show();
+
+
     //SLEEP
-    QMutex dummy;
+    /*QMutex dummy;
     dummy.lock();
     QWaitCondition waitCondition;
     waitCondition.wait(&dummy, 5000);
+*/
+    //mgBB.start();
+  //  waitCondition.wait(&dummy, 2000);
 
-    mgBB.start();
-    waitCondition.wait(&dummy, 2000);
 
-
-    mgSB.start();
+    //mgSB.start();
 
 
     /*

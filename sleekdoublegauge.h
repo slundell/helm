@@ -16,7 +16,7 @@ protected:
     virtual void paintEvent(QPaintEvent *event);
 
 public:
-    SleekDoubleGauge(QWidget * parent=0);
+    SleekDoubleGauge(HelmWidget * parent=0);
     virtual void setTypeFilterLeft(QString s) {setTypeFilter(s);}
     virtual void setSubjectFilterLeft(QString s) {setSubjectFilter(s);}
 
