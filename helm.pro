@@ -26,7 +26,10 @@ SOURCES += main.cpp \
     sleekdoublegauge.cpp \
     volvomessage.cpp \
     canreader.cpp \
-    helmwidget.cpp
+    helmwidget.cpp \
+    canplayer.cpp \
+    persistable.cpp \
+    manager.cpp
 HEADERS += mainwindow.h \
     rowreader.h \
     lineparser.h \
@@ -49,9 +52,17 @@ HEADERS += mainwindow.h \
     sleekdoublegauge.h \
     volvomessage.h \
     canreader.h \
-    helmwidget.h
-FORMS += mainwindow.ui
+    helmwidget.h \
+    canplayer.h \
+    persistable.h \
+    manager.h
+FORMS += mainwindow.ui \
+    settings.ui
 
 QT += widgets
 QT += serialport
 QT += serialbus
+QT += gui
+
+DISTFILES += \
+    .travis.yml

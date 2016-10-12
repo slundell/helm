@@ -23,9 +23,12 @@ public:
     virtual void setTypeFilterRight(QString s) {typeFilterRight_=s;}
     virtual void setSubjectFilterRight(QString s) {subjectFilterRight_=s;}
 
+    virtual void saveSettings();
+    virtual void readSettings();
 
 public slots:
     virtual void newMeasurement(Measurement);
+
 };
 
 #endif // SLEEKDOUBLEGAUGE_H

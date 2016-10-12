@@ -3,7 +3,7 @@
 SleekDoubleGauge::SleekDoubleGauge(HelmWidget *parent) : SleekRoundGauge(parent)
 {
     maxAngle_=180;
-
+    type_ = "SleekDoubleGauge";
     update();
 }
 
@@ -22,6 +22,36 @@ void SleekDoubleGauge::newMeasurement(Measurement m){
         leftValueAge_++;
         update();
     }
+}
+
+void SleekDoubleGauge::saveSettings(){
+
+    SleekRoundGauge::saveSettings();
+    qDebug() << "SleekDoubleGauge::saveSettings()";
+    QSettings settings("helm.ini", QSettings::IniFormat);
+    settings.beginGroup(name_);
+
+    settings.setValue("type_filter_left", typeFilter_);
+    settings.setValue("type_filter_right", typeFilterRight_);
+    settings.setValue("subject_filter_left", subjectFilter_);
+    settings.setValue("subject_filter_right", subjectFilterRight_);
+    settings.remove("type_filter");
+    settings.remove("subject_filter");
+}
+
+
+void SleekDoubleGauge::readSettings(){
+    SleekRoundGauge::readSettings();
+
+    QSettings settings("helm.ini", QSettings::IniFormat);
+
+    settings.beginGroup(name_);
+
+    setTypeFilterLeft(settings.value("type_filter_left", "").toString());
+    setTypeFilterRight(settings.value("type_filter_right", "").toString());
+    setSubjectFilterLeft(settings.value("subject_filter_left", "").toString());
+    setSubjectFilterRight(settings.value("subject_filter_right", "").toString());
+
 }
 
 
@@ -225,7 +255,7 @@ void SleekDoubleGauge::paintEvent(QPaintEvent *)
 
 
 
-     double val;
+     double val=0;
      if ((!disableLeft) && (!disableRight)){
          if (!(((valLeft / valRight) > 1.25) || (valRight / valLeft) > 1.25)){
              val = (valLeft + valRight ) / 2;

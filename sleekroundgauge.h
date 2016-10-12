@@ -22,6 +22,7 @@ protected:
 public:
     SleekRoundGauge(HelmWidget * parent=0);
     virtual void setNominalTicsInterval(double nti) { nominalTicsInterval_ = nti; }
+
 };
 
 #endif // SLEEKROUNDGAUGE_H

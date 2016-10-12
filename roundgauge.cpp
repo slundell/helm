@@ -2,16 +2,17 @@
 #include <cmath>
 
 RoundGauge::RoundGauge(HelmWidget *parent)
-     : HelmWidget(parent), measurement_(), minValue_(0), maxValue_(4500), nominalValue_(1800), criticalValue_(3000), minAngle_(60), maxAngle_(300), ticsInterval_(250)
+     : HelmWidget(parent), minValue_(0), maxValue_(4500), nominalValue_(1800), criticalValue_(3000), minAngle_(60), maxAngle_(300), ticsInterval_(250)
 {
     setWindowTitle(tr("Gauge"));
     decimalPlaces_ = 0;
-
+    type_ = "RoundGauge";
 }
 
 void RoundGauge::saveSettings(){
 
     HelmWidget::saveSettings();
+    qDebug() << "RoundGauge::saveSettings()";
 
     QSettings settings("helm.ini", QSettings::IniFormat);
     settings.beginGroup(name_);
@@ -25,34 +26,22 @@ void RoundGauge::saveSettings(){
 }
 
 
+
+
 void RoundGauge::readSettings(){
     HelmWidget::readSettings();
 
     QSettings settings("helm.ini", QSettings::IniFormat);
 
     settings.beginGroup(name_);
-    setMax(settings.value("max").toDouble());
-    setMin(settings.value("min").toDouble());
-    setCritical(settings.value("critical").toDouble());
-    setNominal(settings.value("nominal").toDouble());
-    setTicsInterval(settings.value("tics_interval").toDouble());
-    setDecimalPlaces(settings.value("decimal_places").toDouble());
+    setMax(settings.value("max", 100).toDouble());
+    setMin(settings.value("min", 0).toDouble());
+    setCritical(settings.value("critical", 90).toDouble());
+    setNominal(settings.value("nominal", 75).toDouble());
+    setTicsInterval(settings.value("tics_interval", 20).toDouble());
+    setDecimalPlaces(settings.value("decimal_places", 0).toDouble());
 }
 
-void RoundGauge::registerPublisher(QObject* o)
-{
-    qDebug() << "Registering Publisher";
-    QObject::connect((QObject*)o, SIGNAL(notify(Measurement)),
-                     (QObject*)this, SLOT(newMeasurement(Measurement)));
-}
-
-void RoundGauge::newMeasurement(Measurement m){
-    if ( ( (subjectFilter_ == "") || (m.getSubject() == subjectFilter_))
-        && ((typeFilter_ == "") || (m.getType() == typeFilter_))){
-        measurement_ = m;
-        update();
-    }
-}
 
 void RoundGauge::paintEvent(QPaintEvent *)
  {
@@ -171,11 +160,4 @@ void RoundGauge::paintEvent(QPaintEvent *)
  }
 
 
-void RoundGauge :: showSettingsForm(){
-    /*
-    QDialog *widget = new QDialog;
-    Ui::DialInstrumentSetup ui;
-    ui.setupUi(widget);
-    widget->show();
-    */
-}
+

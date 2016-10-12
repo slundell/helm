@@ -12,6 +12,8 @@ SleekRoundGauge::SleekRoundGauge(HelmWidget *parent) : RoundGauge(parent)
     backgroundColor_ = QColor(0,0,2);
 
     fontString_ = "Lato Thin";
+
+    type_ = "SleekRoundGauge";
 }
 
 
