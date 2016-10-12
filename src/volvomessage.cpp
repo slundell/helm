@@ -57,7 +57,7 @@ bool VolvoMessage::parseCANFrame(const QCanBusFrame& frame){
             isComplete_ = true;
         } else {
 
-            if ((char)payload[0] == 0x8F){
+            if ((char)(payload[0]) == 0x8F){
                 //Multi frame start
                 lastFrameSeq_ = 0;
 
