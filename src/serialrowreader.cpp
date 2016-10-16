@@ -173,10 +173,10 @@ void SerialRowReader::run()
                     QString uni="";
                     for (int j=ms.size()-1; j>=0; --j){
                        // qDebug()<<"uni"<<uni;
-                        if (!uni.contains(ms[j].getType())){
+                        if (!uni.contains(ms[j].getParameter())){
                             emit notify(ms[j]);
 
-                            uni+=ms[j].getType();
+                            uni+=ms[j].getParameter();
                         }
                     }
                 }

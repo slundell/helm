@@ -21,7 +21,10 @@ protected:
 
 public:
     SleekRoundGauge(HelmWidget * parent=0);
+
     virtual void setNominalTicsInterval(double nti) { nominalTicsInterval_ = nti; }
+    virtual void showSettingsForm();
+    void save(const QString&, const QString&, const QString&, double, double);
 
 };
 

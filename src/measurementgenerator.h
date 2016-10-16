@@ -3,7 +3,9 @@
 
 #include <QThread>
 #include "measurement.h"
-class MeasurementGenerator : public QThread
+#include "persistable.h"
+
+class MeasurementGenerator : public QThread, public Persistable
 
 {
     Q_OBJECT
@@ -13,11 +15,15 @@ protected:
     double currValue_;
     bool up_;
     QString subject_;
-    QString type_;
+    QString parameter_;
     QString unit_;
 
 public:
+    MeasurementGenerator();
     MeasurementGenerator(double, double, QString, QString, QString);
+    virtual void readSettings();
+    virtual void saveSettings();
+    virtual void init();
     virtual void run();
 signals:
     void notify(Measurement);

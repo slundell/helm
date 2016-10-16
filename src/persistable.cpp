@@ -3,6 +3,9 @@
 #include <QSettings>
 #include <QMetaObject>
 
+
+const QString Persistable::filename_ = "helm.ini";
+
 Persistable::Persistable()
 {
 
@@ -12,7 +15,7 @@ Persistable::Persistable()
 
 void Persistable::saveSettings(){
     qDebug() << "Persistable::saveSettings()";
-    QSettings settings("helm.ini", QSettings::IniFormat);
+    QSettings settings(Persistable::filename_, QSettings::IniFormat);
     settings.beginGroup(name_);
     settings.setValue("type", type_);
 }

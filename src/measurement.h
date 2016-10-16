@@ -12,7 +12,7 @@ class Measurement
 
 private:
     QString subject_; // Air, water, engine 1, engine 2...
-    QString type_;    // Temperature, pressure, COG...
+    QString parameter_;    // Temperature, pressure, COG...
     QVariant value_;    // The actual measurement
     double precision_;
     QString unit_;    // Celcius, per minute, hPa
@@ -21,10 +21,10 @@ private:
 public:
     Measurement(){}
     Measurement(QString s, QString t, QVariant v, double p, QString u, QString m = "") :
-            subject_(s), type_(t), value_(v), precision_(p), unit_(u), message_(m) { }
+            subject_(s), parameter_(t), value_(v), precision_(p), unit_(u), message_(m) { }
 
     void setSubject(QString s) { subject_ = s; }
-    void setType(QString t) { type_ = t; }
+    void setParameter(QString t) { parameter_ = t; }
     void setUnit(QString u) { unit_ = u; }
     void setMessage(QString m){ message_ = m; }
     void setValue(const QVariant& v){ value_ = v; }
@@ -32,7 +32,7 @@ public:
 
     QString getSubject() const { return subject_; }
     QString getUnit() const { return unit_; }
-    QString getType() const { return type_; }
+    QString getParameter() const { return parameter_; }
     QString getMessage() const { return message_; }
     QVariant getValue() const { return value_; }
     double getPrecision() const { return precision_; }

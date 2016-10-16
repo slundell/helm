@@ -1,4 +1,6 @@
 #include "sleekdoublegauge.h"
+#include "ui_sleekdoublegaugesettings.h"
+#include "sleekdoublegaugesettings.h"
 
 SleekDoubleGauge::SleekDoubleGauge(HelmWidget *parent) : SleekRoundGauge(parent)
 {
@@ -9,14 +11,14 @@ SleekDoubleGauge::SleekDoubleGauge(HelmWidget *parent) : SleekRoundGauge(parent)
 
 void SleekDoubleGauge::newMeasurement(Measurement m){
     if ( ( (subjectFilter_ == "") || (m.getSubject() == subjectFilter_))
-        && ((typeFilter_ == "") || (m.getType() == typeFilter_))){
+        && ((parameterFilter_ == "") || (m.getParameter() == parameterFilter_))){
         measurement_ = m;
         leftValueAge_=0;
         rightValueAge_++;
         update();
     }
     if ( ( (subjectFilterRight_ == "") || (m.getSubject() == subjectFilterRight_))
-        && ((typeFilterRight_ == "") || (m.getType() == typeFilterRight_))){
+        && ((parameterFilterRight_ == "") || (m.getParameter() == parameterFilterRight_))){
         measurementRight_ = m;
         rightValueAge_=0;
         leftValueAge_++;
@@ -24,33 +26,59 @@ void SleekDoubleGauge::newMeasurement(Measurement m){
     }
 }
 
+void SleekDoubleGauge::save(const QString& name, const QString& leftSubject, const QString& rightSubject, const QString& leftParameter, const QString& rightParameter, double min, double max){
+    setName(name);
+    subjectFilter_ = leftSubject;
+    subjectFilterRight_ = rightSubject;
+    parameterFilter_ = leftParameter;
+    parameterFilterRight_ = rightParameter;
+
+    minValue_ = min;
+    maxValue_ = max;
+
+    isInEditMode_ = true;
+    saveSettings();
+    show();
+}
+
 void SleekDoubleGauge::saveSettings(){
 
     SleekRoundGauge::saveSettings();
     qDebug() << "SleekDoubleGauge::saveSettings()";
-    QSettings settings("helm.ini", QSettings::IniFormat);
+    QSettings settings(Persistable::filename_, QSettings::IniFormat);
     settings.beginGroup(name_);
 
-    settings.setValue("type_filter_left", typeFilter_);
-    settings.setValue("type_filter_right", typeFilterRight_);
+    settings.setValue("parameter_filter_left", parameterFilter_);
+    settings.setValue("parameter_filter_right", parameterFilterRight_);
     settings.setValue("subject_filter_left", subjectFilter_);
     settings.setValue("subject_filter_right", subjectFilterRight_);
-    settings.remove("type_filter");
+    settings.remove("parameter_filter");
     settings.remove("subject_filter");
+    settings.sync();
 }
 
 
 void SleekDoubleGauge::readSettings(){
     SleekRoundGauge::readSettings();
 
-    QSettings settings("helm.ini", QSettings::IniFormat);
+    QSettings settings(Persistable::filename_, QSettings::IniFormat);
 
     settings.beginGroup(name_);
 
-    setTypeFilterLeft(settings.value("type_filter_left", "").toString());
-    setTypeFilterRight(settings.value("type_filter_right", "").toString());
+    setParameterFilterLeft(settings.value("parameter_filter_left", "").toString());
+    setParameterFilterRight(settings.value("parameter_filter_right", "").toString());
     setSubjectFilterLeft(settings.value("subject_filter_left", "").toString());
     setSubjectFilterRight(settings.value("subject_filter_right", "").toString());
+
+}
+
+void SleekDoubleGauge::showSettingsForm()
+{
+
+    SleekDoubleGaugeSettings* s = new SleekDoubleGaugeSettings();
+    connect(s, &SleekDoubleGaugeSettings::ok, this, &SleekDoubleGauge::save);
+    s->show();
+
 
 }
 
@@ -339,7 +367,7 @@ void SleekDoubleGauge::paintEvent(QPaintEvent *)
      QString t = measurement_.getUnit();
      painter.drawText(-80,0,160,60, (Qt::AlignVCenter | Qt::AlignHCenter), t);
 
-     t = measurement_.getType();
+     t = measurement_.getParameter();
      painter.drawText(-80,15,160,60, (Qt::AlignVCenter | Qt::AlignHCenter), t);
 
  }

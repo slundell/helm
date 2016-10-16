@@ -1,4 +1,5 @@
 #include "sleekroundgauge.h"
+#include "sleekroundgaugesettings.h"
 
 SleekRoundGauge::SleekRoundGauge(HelmWidget *parent) : RoundGauge(parent)
 {
@@ -16,6 +17,26 @@ SleekRoundGauge::SleekRoundGauge(HelmWidget *parent) : RoundGauge(parent)
     type_ = "SleekRoundGauge";
 }
 
+
+void SleekRoundGauge::save(const QString& name, const QString& subject, const QString& parameter, double min, double max){
+    setName(name);
+    subjectFilter_ = subject;
+    parameterFilter_ = parameter;
+
+    minValue_ = min;
+    maxValue_ = max;
+
+    isInEditMode_ = true;
+    saveSettings();
+    show();
+}
+
+void SleekRoundGauge::showSettingsForm(){
+
+    SleekRoundGaugeSettings* s = new SleekRoundGaugeSettings();
+    connect(s, &SleekRoundGaugeSettings::ok, this, &SleekRoundGauge::save);
+    s->show();
+}
 
 void SleekRoundGauge::paintEvent(QPaintEvent *)
  {

@@ -16,7 +16,7 @@ private:
     Measurement measurement_;
 
     QString subjectFilter_;
-    QString typeFilter_;
+    QString parameterFilter_;
     QStringList activeMsgBoxDTCs_;
     QStringList ignoreDTCs_;
 
@@ -27,7 +27,7 @@ public:
     DTCDisplay();
 
     virtual void setWinTitle(QString s) {winTitle_=s;}
-    virtual void setTypeFilter(QString s) {typeFilter_=s;}
+    virtual void setParameterFilter(QString s) {parameterFilter_=s;}
     virtual void setSubjectFilter(QString s) {subjectFilter_=s;}
     virtual void showSettingsForm();
     virtual void registerPublisher(QObject*);

@@ -29,7 +29,11 @@ SOURCES += main.cpp \
     helmwidget.cpp \
     canplayer.cpp \
     persistable.cpp \
-    manager.cpp
+    manager.cpp \
+    settingswindow.cpp \
+    sleekdoublegaugesettings.cpp \
+    sleekroundgaugesettings.cpp \
+    selectcomponenttype.cpp
 HEADERS += mainwindow.h \
     rowreader.h \
     lineparser.h \
@@ -55,14 +59,21 @@ HEADERS += mainwindow.h \
     helmwidget.h \
     canplayer.h \
     persistable.h \
-    manager.h
-FORMS += mainwindow.ui \
-    settings.ui
+    manager.h \
+    settingswindow.h \
+    sleekdoublegaugesettings.h \
+    sleekroundgaugesettings.h \
+    selectcomponenttype.h
+FORMS += \
+    settings.ui \
+    sleekdoublegaugesettings.ui \
+    sleekroundgaugesettings.ui \
+    selectcomponenttype.ui
 
 QT += widgets
 QT += serialport
 QT += serialbus
-QT += gui
 
 DISTFILES += \
     .travis.yml
+

@@ -1,11 +1,61 @@
 #include "measurementgenerator.h"
+#include <QDebug>
+#include <QSettings>
+#include <QVariant>
 
+
+
+MeasurementGenerator::MeasurementGenerator()
+    : min_(0), max_(100), subject_(""), parameter_(""), unit_("")
+{
+    currValue_ = min_;
+    up_ = true;
+    type_ = "MeasurementGenerator";
+}
 
 MeasurementGenerator::MeasurementGenerator(double min, double max, QString subject, QString type, QString unit)
-    : min_(min), max_(max), subject_(subject), type_(type), unit_(unit)
+    : min_(min), max_(max), subject_(subject), parameter_(type), unit_(unit)
 {
-    currValue_ = min;
+    currValue_ = min_;
     up_ = true;
+    type_ = "MeasurementGenerator";
+}
+
+
+
+void MeasurementGenerator::saveSettings(){
+    Persistable::saveSettings();
+    qDebug() << "MeasurementGenerator::saveSettings()";
+    QSettings settings(Persistable::filename_, QSettings::IniFormat);
+    settings.beginGroup(name_);
+
+    settings.setValue("min", min_);
+    settings.setValue("max", max_);
+    settings.setValue("subject", subject_);
+    settings.setValue("type", parameter_);
+    settings.setValue("unit", unit_);
+}
+
+void MeasurementGenerator::readSettings(){
+    Persistable::readSettings();
+
+    QSettings settings(Persistable::filename_, QSettings::IniFormat);
+
+    settings.beginGroup(name_);
+
+    max_ = settings.value("max", 100).toDouble();
+    min_ = settings.value("min", 0).toDouble();
+    subject_ = settings.value("subject", "").toString();
+    parameter_ = settings.value("type", "").toString();
+    unit_ = settings.value("unit", "").toString();
+
+
+
+}
+
+
+void MeasurementGenerator::init(){
+    run();
 }
 
 
@@ -33,7 +83,7 @@ void MeasurementGenerator :: run(){
         Measurement m;
         m.setValue(currValue_);
         m.setSubject(subject_);
-        m.setType(type_);
+        m.setParameter(parameter_);
         m.setUnit(unit_);
 
         emit notify(m);

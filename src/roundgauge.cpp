@@ -14,7 +14,7 @@ void RoundGauge::saveSettings(){
     HelmWidget::saveSettings();
     qDebug() << "RoundGauge::saveSettings()";
 
-    QSettings settings("helm.ini", QSettings::IniFormat);
+    QSettings settings(Persistable::filename_, QSettings::IniFormat);
     settings.beginGroup(name_);
 
     settings.setValue("max", maxValue_);
@@ -23,6 +23,7 @@ void RoundGauge::saveSettings(){
     settings.setValue("nominal", nominalValue_);
     settings.setValue("tics_interval", ticsInterval_);
     settings.setValue("decimal_places", decimalPlaces_);
+    settings.sync();
 }
 
 
@@ -31,7 +32,7 @@ void RoundGauge::saveSettings(){
 void RoundGauge::readSettings(){
     HelmWidget::readSettings();
 
-    QSettings settings("helm.ini", QSettings::IniFormat);
+    QSettings settings(Persistable::filename_, QSettings::IniFormat);
 
     settings.beginGroup(name_);
     setMax(settings.value("max", 100).toDouble());

@@ -3,7 +3,7 @@
 
 DTCDisplay::DTCDisplay(): measurement_()
 {
-    typeFilter_ = "DTC";
+    parameterFilter_ = "DTC";
     winTitle_ = "DTC";
 }
 
@@ -25,7 +25,7 @@ void DTCDisplay::registerDTCResetter(QObject* o)
 void DTCDisplay::newMeasurement(Measurement m){
 
     if ( ( (subjectFilter_ == "") || (m.getSubject() == subjectFilter_))
-        && ((typeFilter_ == "") || (m.getType() == typeFilter_))){
+        && ((parameterFilter_ == "") || (m.getParameter() == parameterFilter_))){
         measurement_ = m;
 
         if (!activeMsgBoxDTCs_.contains((m.getValue().toString())) &&

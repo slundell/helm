@@ -10,12 +10,12 @@ void PropSlipCalculator::newMeasurement(Measurement m)
     QMutexLocker ml(newMeasurementMutex_);
     //qDebug() << "PropSlipCalculator recieve: " << m.getValue();
 
-    if ((m.getSubject() == "Engine") && (m.getType() == "Speed") && (m.getUnit() == "RPM"))
+    if ((m.getSubject() == "Engine") && (m.getParameter() == "Speed") && (m.getUnit() == "RPM"))
     {
         rpm_ = m;
         //qDebug() << "PropSlipCalculator recieve: rpm" << m.getValue();
     }
-    else if ((m.getSubject() == "Båt") && (m.getUnit() == "Knop"))
+    else if ((m.getSubject() == "BÃ¥t") && (m.getUnit() == "Knop"))
     {
         speed_ = m;
         //qDebug() << "PropSlipCalculator recieve:  speed" << m.getValue();
@@ -42,7 +42,7 @@ void PropSlipCalculator::newMeasurement(Measurement m)
         //qDebug() << "Slip: " << slip;
         Measurement slipm;
         slipm.setSubject(tr("Propeller"));
-        slipm.setType(tr("Slip"));
+        slipm.setParameter("Slip");
         slipm.setUnit(tr("%"));
         slipm.setPrecision(2);
         slipm.setValue(slip);

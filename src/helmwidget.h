@@ -18,7 +18,7 @@ protected:
 
     static quint8 nameNum_;
     QString subjectFilter_;
-    QString typeFilter_;
+    QString parameterFilter_;
 
     bool isInEditMode_;
 
@@ -27,7 +27,7 @@ protected:
     QPoint oldPos_;
 
 
-    virtual void setTypeFilter(QString s) {typeFilter_=s;}
+    virtual void setParameterFilter(QString s) {parameterFilter_=s;}
     virtual void setSubjectFilter(QString s) {subjectFilter_=s;}
 
     virtual void setX(int x){ x_=x; move(x_,y_);}
@@ -41,7 +41,7 @@ public:
     virtual void saveSettings();
     virtual void readSettings();
     virtual void init();
-    virtual void showSettingsForm();
+    virtual void showSettingsForm() {} //TODO: should be pure virtual later on
     virtual void registerPublisher(QObject*);
 
 

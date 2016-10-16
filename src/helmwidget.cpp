@@ -1,5 +1,8 @@
 #include "helmwidget.h"
 #include <QApplication> //for qApp
+#include <QDialog>
+
+
 
 quint8 HelmWidget::nameNum_ = 1;
 
@@ -19,16 +22,17 @@ void HelmWidget::init(){
 void HelmWidget::saveSettings(){
     Persistable::saveSettings();
     qDebug() << "HelmWidget::saveSettings()";
-    QSettings settings("helm.ini", QSettings::IniFormat);
+    QSettings settings(Persistable::filename_, QSettings::IniFormat);
     settings.beginGroup(name_);
     settings.setValue("position", pos());
     settings.setValue("size", size());
-    settings.setValue("type_filter", typeFilter_);
+    settings.setValue("type_filter", parameterFilter_);
     settings.setValue("subject_filter", subjectFilter_);
+    settings.sync();
 }
 
 void HelmWidget::readSettings(){
-    QSettings settings("helm.ini", QSettings::IniFormat);
+    QSettings settings(Persistable::filename_, QSettings::IniFormat);
 
     settings.beginGroup(name_);
     //qDebug() << name_;
@@ -51,21 +55,20 @@ void HelmWidget::registerPublisher(QObject* o)
 
 void HelmWidget::newMeasurement(Measurement m){
     if ( ( (subjectFilter_ == "") || (m.getSubject() == subjectFilter_))
-        && ((typeFilter_ == "") || (m.getType() == typeFilter_))){
+        && ((parameterFilter_ == "") || (m.getParameter() == parameterFilter_))){
         measurement_ = m;
         update();
     }
 }
 
+/*
 void HelmWidget :: showSettingsForm(){
-    /*
-    QDialog *widget = new QDialog;
-    Ui::DialInstrumentSetup ui;
-    ui.setupUi(widget);
-    widget->show();
-    */
-}
+  qDebug() << "HelmWidget:showSettingsForm";
+   ComponentSettings* cs = new ComponentSettings();
+   cs->show();
 
+}
+*/
 void HelmWidget::mouseReleaseEvent(QMouseEvent*){
     qDebug() << "HelmWidget:mouseReleaseEvent";
     //saveSettings();

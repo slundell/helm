@@ -8,7 +8,7 @@ class SleekDoubleGauge : public SleekRoundGauge
 
 protected:
     QString subjectFilterRight_;
-    QString typeFilterRight_;
+    QString parameterFilterRight_;
     Measurement measurementRight_;
     unsigned int rightValueAge_;
     unsigned int leftValueAge_;
@@ -17,17 +17,19 @@ protected:
 
 public:
     SleekDoubleGauge(HelmWidget * parent=0);
-    virtual void setTypeFilterLeft(QString s) {setTypeFilter(s);}
+    virtual void setParameterFilterLeft(QString s) {setParameterFilter(s);}
     virtual void setSubjectFilterLeft(QString s) {setSubjectFilter(s);}
 
-    virtual void setTypeFilterRight(QString s) {typeFilterRight_=s;}
+    virtual void setParameterFilterRight(QString s) {parameterFilterRight_=s;}
     virtual void setSubjectFilterRight(QString s) {subjectFilterRight_=s;}
 
     virtual void saveSettings();
     virtual void readSettings();
+    virtual void showSettingsForm();
 
 public slots:
     virtual void newMeasurement(Measurement);
+    virtual void save(const QString&, const QString&, const QString&, const QString&, const QString&, double, double);
 
 };
 

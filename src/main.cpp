@@ -51,26 +51,6 @@ int main(int argc, char *argv[])
 
     QString date = QDateTime::currentDateTime().toString("yyyy-MM-dd_hh.mm.ss");
 
-
-    ///////////////////////////////////// PORT ENGINE SETUP /////////////////////////////////////
- /*   ELM327RowReader elmBB;
-    //elmBB.setComPort("/dev/ttyD3BB");
-    elmBB.setComPort("COM6");
-    elmBB.setBaud(115200);
-    elmBB.enableLogging(QString("/home/simon/boatlogs/engine_BB_")+date+".txt");
-
-    VPD3OBD2Parser d3BB;
-    elmBB.setParser(&d3BB);
-    dispatch.registerPublisher(&elmBB);
-
-
-    elmBB.start();
-
-    DTCDisplay dtcBB;
-    dtcBB.registerPublisher(&elmBB);
-    dtcBB.setWinTitle("DTC Babord");
-    dtcBB.registerDTCResetter(&elmBB);*/
-
 /*
     CANReader canReaderBB;
     VPD3CANFrameParser canBBParser;
@@ -85,35 +65,20 @@ int main(int argc, char *argv[])
     canReaderSB.open("vcan1");
 */
 
+    Manager::instance()->init();
+    Manager::instance()->loadAll();
 
-    Manager::loadAll();
-
-    MeasurementGenerator mgBB(1, 4100, "Engine Port", "Engine Speed", "RPM");
-    MeasurementGenerator mgSB(1, 4000, "Engine Starboard", "Engine Speed", "RPM");
-
-  //  SleekDoubleGauge rpmBB;
-  //  SleekDoubleGauge railpressure;
-
-    //dispatch.registerPublisher(&mgBB);
-    //dispatch.registerPublisher(&mgSB);
-  //  dispatch.registerSubscriber(&rpmBB);
-  //  dispatch.registerSubscriber(&railpressure);
+    //MeasurementGenerator mgBB(1, 4100, "Engine Port", "Engine Speed", "RPM");
+    //MeasurementGenerator mgSB(1, 4000, "Engine Starboard", "Engine Speed", "RPM");
 
 
-    /*rpmBB.init();
-    rpmBB.show();*/
+    Manager::instance()->initAll();
 
-    Manager::initAll();
 
-    //railpressure.init();
-    //railpressure.show();
-
-    //mgBB.start();
-    //mgSB.start();
 
 
   quint8 r = a.exec();
-  Manager::closeAll();
+  Manager::instance()->closeAll();
   return r;
 
 }

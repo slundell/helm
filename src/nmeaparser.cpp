@@ -22,8 +22,8 @@ QVector<Measurement> NMEAParser::parseLine(const QString& line)
 
         Measurement m;
         m.setValue(words[7].toDouble());
-        m.setSubject("Båt");
-        m.setType("Fart över grund");
+        m.setSubject("BÃ¥t");
+        m.setParameter("Fart Ã¶ver grund");
         m.setUnit("Knop");
         measurements.push_back(m);
     }

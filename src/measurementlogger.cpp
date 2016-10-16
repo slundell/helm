@@ -19,7 +19,7 @@ void MeasurementLogger::newMeasurement(Measurement m)
    //qDebug() << "Logging: " << m.getSubject() << " " << m.getType();
 
    stream_ << m.getSubject() << " ";
-   stream_ << m.getType() << " ";
+   stream_ << m.getParameter() << " ";
 
    QVariant v = m.getValue();
    if (v.canConvert(QVariant::Int))

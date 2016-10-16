@@ -156,7 +156,7 @@ QVector<Measurement> VPD3OBD2Parser::parseLine(const QString& line)
         Measurement m;
         m.setValue("DTC");
         m.setSubject("Engine");
-        m.setType("DTC");
+        m.setParameter("DTC");
         m.setUnit("");
         m.setMessage("All DTCs have been cleared");
         qDebug() << m.getMessage();
@@ -168,7 +168,7 @@ QVector<Measurement> VPD3OBD2Parser::parseLine(const QString& line)
            quint32 b = charHexToUInt(words[2]);
            m.setValue((double)b*100.0/255.0);
            m.setSubject("Engine");
-           m.setType("Calculated Load");
+           m.setParameter("Calculated Load");
            m.setUnit("%");
            measurements.push_back(m);
         }
@@ -177,7 +177,7 @@ QVector<Measurement> VPD3OBD2Parser::parseLine(const QString& line)
             quint32 b = charHexToUInt(words[2]);
             m.setValue((int)b - 40);
             m.setSubject("Engine");
-            m.setType("Coolant Temperature");
+            m.setParameter("Coolant Temperature");
             m.setUnit("C");
             measurements.push_back(m);
          }
@@ -187,7 +187,7 @@ QVector<Measurement> VPD3OBD2Parser::parseLine(const QString& line)
             quint32 lsb = charHexToUInt(words[3]);
             m.setValue(((msb * 256) + lsb)/4);
             m.setSubject("Engine");
-            m.setType("RPM");
+            m.setParameter("RPM");
             m.setUnit("RPM");
             measurements.push_back(m);
         }
@@ -196,7 +196,7 @@ QVector<Measurement> VPD3OBD2Parser::parseLine(const QString& line)
             quint32 b = charHexToUInt(words[2]);
             m.setValue(b);
             m.setSubject("Engine");
-            m.setType("Intake Manifold Absolute Pressure");
+            m.setParameter("Intake Manifold Absolute Pressure");
             m.setUnit("kPa");
             measurements.push_back(m);
         }
@@ -205,7 +205,7 @@ QVector<Measurement> VPD3OBD2Parser::parseLine(const QString& line)
             quint32 b = charHexToUInt(words[2]);
             m.setValue((int)b - 40);
             m.setSubject("Engine");
-            m.setType("Intake Air Temperature");
+            m.setParameter("Intake Air Temperature");
             m.setUnit("C");
             measurements.push_back(m);
         }
@@ -215,7 +215,7 @@ QVector<Measurement> VPD3OBD2Parser::parseLine(const QString& line)
             quint32 lsb = charHexToUInt(words[3]);
             m.setValue(((msb * 256) + lsb)/100);
             m.setSubject("Engine");
-            m.setType("Manifold Air Flow");
+            m.setParameter("Manifold Air Flow");
             m.setUnit("g/sec");
             measurements.push_back(m);
         }
@@ -225,7 +225,7 @@ QVector<Measurement> VPD3OBD2Parser::parseLine(const QString& line)
            quint32 lsb = charHexToUInt(words[3]);
            m.setValue(((msb * 256) + lsb) * 10);
            m.setSubject("Engine");
-           m.setType("Fuel Rail Pressure");
+           m.setParameter("Fuel Rail Pressure");
            m.setUnit("kPa");
            measurements.push_back(m);
        }
@@ -289,7 +289,7 @@ QVector<Measurement> VPD3OBD2Parser::parseDTC(const QString & response)
             Measurement m;
             m.setValue(code);
             m.setSubject("Engine");
-            m.setType("DTC");
+            m.setParameter("DTC");
             m.setUnit("");
             m.setMessage(getDTCDescription(code));
             qDebug() << m.getMessage();
@@ -327,7 +327,7 @@ bool VPD3OBD2Parser::checkForReconnect(const QString& sentences){
 
       m.setValue(words[7].toInt(&ok, 16));
       m.setSubject("Engine");
-      m.setType("Speed");
+      m.setParameter("Speed");
       m.setUnit("RPM");
       if (ok)
           measurements.push_back(m);
@@ -342,7 +342,7 @@ bool VPD3OBD2Parser::checkForReconnect(const QString& sentences){
           bool ok;
           m.setValue((words[9]+words[10]).toInt(&ok, 16));
           m.setSubject("Engine");
-          m.setType("Speed");
+          m.setParameter("Speed");
           m.setUnit("RPM");
           if (ok)
               measurements.push_back(m);
@@ -352,7 +352,7 @@ bool VPD3OBD2Parser::checkForReconnect(const QString& sentences){
           bool ok;
           m.setValue(words[8].toInt(&ok, 16));
           m.setSubject("Engine");
-          m.setType("MAP");
+          m.setParameter("MAP");
           m.setUnit("bar");
           if (ok)
               measurements.push_back(m);
@@ -365,7 +365,7 @@ bool VPD3OBD2Parser::checkForReconnect(const QString& sentences){
       bool ok;
       m.setValue(words[7].toInt(&ok, 16));
       m.setSubject("Engine");
-      m.setType("MAT");
+      m.setParameter("MAT");
       m.setUnit("C");
       if (ok)
           measurements.push_back(m);
@@ -379,7 +379,7 @@ bool VPD3OBD2Parser::checkForReconnect(const QString& sentences){
               Measurement m;
               m.setValue("felkod");
               m.setSubject("Engine");
-              m.setType("Speed");
+              m.setParameter("Speed");
               m.setUnit("RPM");
               m.setMessage(err->msg_);
               measurements.push_back(m);
@@ -410,7 +410,7 @@ bool VPD3OBD2Parser::checkForReconnect(const QString& sentences){
       Measurement m;
       m.setValue(line);
       m.setSubject("Engine");
-      m.setType("Unknown message");
+      m.setParameter("Unknown message");
       m.setUnit("");
       measurements.push_back(m);
   }*/
