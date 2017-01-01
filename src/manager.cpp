@@ -11,6 +11,7 @@
 QVector<Persistable*> Manager::persistables_;
 Dispatcher Manager::dispatcher_;
 SettingsWindow* Manager::settingsWindow_;
+SelectComponentType* Manager::selectComponentTypeWindow_;
 Manager* Manager::instance_;
 
 Manager::Manager(QObject *parent) : QObject(parent)
@@ -40,19 +41,22 @@ void Manager::init(){
 
 void Manager::initUI(){
     settingsWindow_ = new SettingsWindow();
+    selectComponentTypeWindow_ = new SelectComponentType();
+
     if (!instance_)
         qDebug() << "Instance not inited";
 
-
-
     if (!settingsWindow_)
         qDebug() << "settingsWindow not inited";
-    if (!connect(settingsWindow_, &SettingsWindow::createNew, instance_, &Manager::onCreateNew))
-        qDebug() << "Error connecting";
+
+    if (!selectComponentTypeWindow_)
+        qDebug() << "selectComponentTypeWindow_ not inited";
+
+    connect(settingsWindow_, &SettingsWindow::createNew, instance_, &Manager::onSelectComponentType);
+    connect(selectComponentTypeWindow_, &SelectComponentType::onComponentTypeSelected, instance_, &Manager::onCreateNew);
     connect(settingsWindow_, &SettingsWindow::close, instance_, &Manager::onSave);
     connect(settingsWindow_, &SettingsWindow::edit, instance_, &Manager::onEdit);
     connect(settingsWindow_, &SettingsWindow::deleteIt, instance_, &Manager::onDelete);
-
     connect(this, &Manager::createdNew, settingsWindow_, &SettingsWindow::onComponentAdded);
     connect(this, &Manager::deleted, settingsWindow_, &SettingsWindow::onComponentDeleted);
 
@@ -80,10 +84,10 @@ void Manager::deleteComponent(const QString & c)
     settings.sync();
 }
 
-void Manager::onCreateNew()
+void Manager::onCreateNew(const QString& type)
 {
-    qDebug() << "Manager::createNewSlot";
-    QString type = "SleekRoundGauge";
+    qDebug() << "Manager::onCreateNew"<<type;
+
     if (type == "SleekDoubleGauge"){
         SleekDoubleGauge* s = new SleekDoubleGauge();
         dispatcher_.registerSubscriber(s);
@@ -119,6 +123,11 @@ void Manager::onDelete(const QString &c)
 void Manager::onSave()
 {
     saveAll();
+}
+
+void Manager::onSelectComponentType()
+{
+    selectComponentTypeWindow_->show();
 }
 
 void Manager::load(const QString &name){

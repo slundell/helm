@@ -7,6 +7,7 @@
 #include "dispatcher.h"
 #include "ui_settings.h"
 #include "settingswindow.h"
+#include "selectcomponenttype.h"
 
 class Manager : public QObject
 {
@@ -17,6 +18,7 @@ private:
     static QVector<Persistable*> persistables_;
     static Dispatcher dispatcher_;
     static SettingsWindow* settingsWindow_;
+    static SelectComponentType* selectComponentTypeWindow_;
 
     static Manager* instance_;
     void load(const QString&);
@@ -42,10 +44,11 @@ signals:
     void deleted(const QString&);
 
 public slots:
-    void onCreateNew();
+    void onCreateNew(const QString&);
     void onDelete(const QString&);
     void onEdit(const QString&){}
     void onSave();
+    void onSelectComponentType();
 
 };
 #endif // PERSISTABLEFACTORY_H

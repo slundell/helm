@@ -20,12 +20,19 @@ private:
 
 
 signals:
-    void onTypeSelected(const QString&);
+    void onComponentTypeSelected(const QString&);
     void onCancel();
-    //connect these
+
+
 public slots:
-    void on_OkButton_clicked();
     void on_CancelButton_clicked();
+    void on_RoundGaugeButton_clicked();
+    void on_SleekRoundGaugeButton_clicked();
+    void on_SleekDoubleGaugeButton_clicked();
+    void on_MeasurementGenerator_clicked();
+    void on_CANReaderButton_clicked();
+    void on_ELM327ReaderButton_clicked();
+
 };
 
 #endif // SELECTCOMPONENTTYPE_H

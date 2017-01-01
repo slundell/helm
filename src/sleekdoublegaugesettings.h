@@ -21,7 +21,7 @@ private:
 
 public slots:
     void on_OkButton_clicked();
-    void on_CloseButton_clicked() {emit cancel();}
+    void on_CancelButton_clicked() {emit cancel();}
 
 signals:
     void ok(const QString&, const QString&, const QString&, const QString&, const QString&, double, double);
