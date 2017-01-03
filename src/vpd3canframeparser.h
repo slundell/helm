@@ -16,6 +16,8 @@ public:
     explicit VPD3CANFrameParser();
     QVector<Measurement> parse(const QCanBusFrame&);
     virtual void setSubject(const QString&);
+    virtual QString getName() { return "VPD3CANFrameParser"; }
+    virtual QString getSubject() {return subject_; }
 
 signals:
 };

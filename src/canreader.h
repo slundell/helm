@@ -9,7 +9,7 @@
 #include "measurement.h"
 #include "volvomessage.h"
 
-class CANReader : public QObject
+class CANReader : public Persistable, QObject
 {
     Q_OBJECT
 
@@ -17,6 +17,9 @@ class CANReader : public QObject
 protected:
     QCanBusDevice* device_;
     CANFrameParser* parser_;
+    QString canBusDeviceName_;
+
+
 //    QFile logFile_;
 //    QTextStream logStream_;
 //    bool  useLogging_;
@@ -25,6 +28,9 @@ public:
     CANReader();
     virtual void open(QString);
     virtual void close();
+
+    virtual void saveSettings();
+    virtual void readSettings();
 
 //    virtual void setBaud(int);
 

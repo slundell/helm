@@ -3,9 +3,11 @@
 
 CANReader::CANReader()
 {
+    type_="CANReader";
 }
 
 void CANReader::open(QString iface){
+    canBusDeviceName_ = iface;
     bool supportsSocketCan = false;
     foreach (const QByteArray &backend, QCanBus::instance()->plugins()) {
         if (backend == "socketcan") {
@@ -17,7 +19,7 @@ void CANReader::open(QString iface){
         qDebug() << "No SocketCan support!";
         exit(1);
     }
-   device_ = QCanBus::instance()->createDevice("socketcan", iface);
+   device_ = QCanBus::instance()->createDevice("socketcan", canBusDeviceName_);
 
    if (!device_->connectDevice()){
        qDebug() << "Unable to connect!";
@@ -37,6 +39,35 @@ void CANReader::setParser(CANFrameParser* p){
     parser_=p;
 }
 
+
+void CANReader::saveSettings(){
+    Persistable::saveSettings();
+    qDebug() << "CANReader::saveSettings()";
+    QSettings settings(Persistable::filename_, QSettings::IniFormat);
+    settings.beginGroup(name_);
+    settings.setValue("device", canBusDeviceName_);
+    settings.setValue("parser", parser_->getName());
+    settings.setValue("subject", parser_->getSubject());
+    settings.sync();
+}
+
+void CANReader::readSettings(){
+    QSettings settings(Persistable::filename_, QSettings::IniFormat);
+
+    settings.beginGroup(name_);
+
+    QString parserType = settings.value("parser", "").toString();
+    QString deviceName = settings.value("device", "").toString();
+    QString subject    = settings.value("subject", "").toString();
+    //A bit more error checking needed.
+
+    if (parserType == "VPD3CANFrameParser") {
+        parser_ = new VPD3CANFrameParser();
+        parser_->setSubject(subject);
+        open(deviceName);
+    }
+
+}
 
 void CANReader::receiveFrames(){
     //qDebug() << "CANReader::receiveFrames()";
