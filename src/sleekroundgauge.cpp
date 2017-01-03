@@ -3,7 +3,7 @@
 
 SleekRoundGauge::SleekRoundGauge(HelmWidget *parent) : RoundGauge(parent)
 {
-    nominalTicsInterval_ = 1; //if not a positive value, the for-loop below will be infinite
+    nominalTicsInterval_ = 10; //if not a positive value, the for-loop below will be infinite
     scaleColor_ = QColor(255, 255, 255);
     scaleDarkColor_ = QColor(2, 5, 6);
     scaleDarkerColor_ = QColor(0, 0, 2);

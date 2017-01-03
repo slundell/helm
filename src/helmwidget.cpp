@@ -13,6 +13,7 @@ HelmWidget::HelmWidget(QWidget *parent) :
     nameNum_++;
     isInEditMode_ = false;
     type_ = "HelmWidget";
+    resized_ = true;
 }
 
 void HelmWidget::init(){
@@ -72,12 +73,14 @@ void HelmWidget :: showSettingsForm(){
 void HelmWidget::mouseReleaseEvent(QMouseEvent*){
     qDebug() << "HelmWidget:mouseReleaseEvent";
     //saveSettings();
+    resized_ = true;
 }
 
 void HelmWidget::resizeEvent(QResizeEvent *){
     qDebug() << "HelmWidget:resizeEvent";
     //saveSettings();
     if (isInEditMode_){
+        resized_ = true;
         repaint();
     } else {
 
@@ -99,7 +102,7 @@ void HelmWidget::mouseDoubleClickEvent(QMouseEvent * e){
         qDebug() << "Not in edit mode";
     }
 
-
+    resized_ = true;
     show();
     e->accept();
 }
@@ -113,6 +116,7 @@ void HelmWidget::mousePressEvent(QMouseEvent* event){
 
 void HelmWidget::mouseMoveEvent(QMouseEvent* event){
     if (isInEditMode_) {
+        resized_ = true;
         const QPoint delta = event->globalPos() - oldPos_;
         move(x()+delta.x(), y()+delta.y());
         oldPos_ = event->globalPos();

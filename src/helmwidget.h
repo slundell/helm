@@ -21,6 +21,7 @@ protected:
     QString parameterFilter_;
 
     bool isInEditMode_;
+    bool resized_;
 
     int x_;
     int y_;

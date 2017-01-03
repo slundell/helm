@@ -32,7 +32,7 @@ void MeasurementGenerator::saveSettings(){
     settings.setValue("min", min_);
     settings.setValue("max", max_);
     settings.setValue("subject", subject_);
-    settings.setValue("type", parameter_);
+    settings.setValue("parameter", parameter_);
     settings.setValue("unit", unit_);
 }
 
@@ -46,7 +46,7 @@ void MeasurementGenerator::readSettings(){
     max_ = settings.value("max", 100).toDouble();
     min_ = settings.value("min", 0).toDouble();
     subject_ = settings.value("subject", "").toString();
-    parameter_ = settings.value("type", "").toString();
+    parameter_ = settings.value("parameter", "").toString();
     unit_ = settings.value("unit", "").toString();
 
 
@@ -55,12 +55,14 @@ void MeasurementGenerator::readSettings(){
 
 
 void MeasurementGenerator::init(){
-    run();
+    start();
 }
 
 
 void MeasurementGenerator :: run(){
 
+
+    qDebug() << "MeasurementGenerator::run()";
     while (true){
 
         if (up_){
