@@ -300,7 +300,7 @@ void SleekDoubleGauge::paintEvent(QPaintEvent *){
 
      double val=0;
      if ((!disableLeft) && (!disableRight)){
-         if (!(((valLeft / valRight) > 1.25) || (valRight / valLeft) > 1.25)){
+         if (!(((valLeft / valRight) > 1.15) || (valRight / valLeft) > 1.15)){
              val = (valLeft + valRight ) / 2;
 
 
@@ -311,11 +311,11 @@ void SleekDoubleGauge::paintEvent(QPaintEvent *){
                 diffPct = 100 * (valLeft - valRight ) / val;
              }
 
-             double maxIndicatorPct = 25;
+             double maxIndicatorPct = 5;
              double diffAngle = -90 * diffPct/maxIndicatorPct;
 
-             if (diffAngle > +90)  diffAngle =  90;
-             if (diffAngle < -90) diffAngle = -90;
+             if (diffAngle > +160) diffAngle =  160;
+             if (diffAngle < -160) diffAngle = -160;
 
              pen.setCapStyle(Qt::FlatCap);
              pen.setWidth(5);

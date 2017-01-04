@@ -7,7 +7,7 @@
 quint8 HelmWidget::nameNum_ = 1;
 
 HelmWidget::HelmWidget(QWidget *parent) :
-    QWidget(parent) //Qt::FramelessWindowHint)
+    QWidget(parent, Qt::FramelessWindowHint)
 {
     name_ = QString("helmwidget_") + QString::number(nameNum_);
     nameNum_++;

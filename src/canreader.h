@@ -10,7 +10,7 @@
 #include "volvomessage.h"
 #include "persistable.h"
 
-class CANReader : public QObject, Persistable
+class CANReader : public QObject, public Persistable
 {
     Q_OBJECT
 
@@ -28,6 +28,7 @@ protected:
 public:
     CANReader();
     virtual void open(QString);
+    void init();
     virtual void close();
 
     virtual void saveSettings();

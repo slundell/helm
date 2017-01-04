@@ -6,7 +6,7 @@
 #include "roundgauge.h"
 #include "sleekroundgauge.h"
 #include "measurementgenerator.h"
-
+#include "canreader.h"
 
 //define static variables
 QVector<Persistable*> Manager::persistables_;
@@ -108,8 +108,12 @@ void Manager::onCreateNew(const QString& type)
         MeasurementGenerator* m = new MeasurementGenerator();
         dispatcher_.registerPublisher(m);
         persistables_.push_back(m);
-        //m->showSettingsForm();
+    } else if (type == "CANReader"){
+        CANReader* r = new CANReader();
+        dispatcher_.registerPublisher(r);
+        persistables_.push_back(r);
     }
+
 
 
 
@@ -165,6 +169,14 @@ void Manager::load(const QString &name){
         emit createdNew(name);
         dispatcher_.registerPublisher(m);
         persistables_.push_back(m);
+    } else if (type == "CANReader"){
+        qDebug() << "About to create a CANReader";
+        CANReader* r = new CANReader();
+        r->setName(name);
+        r->readSettings();
+        emit createdNew(name);
+        dispatcher_.registerPublisher(r);
+        persistables_.push_back(r);
     }
     else {
         qDebug() << "Could not load" << name << "since type" << type << "is unknown";

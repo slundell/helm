@@ -8,11 +8,20 @@ CANReader::CANReader()
     type_="CANReader";
 }
 
-void CANReader::open(QString iface){
+void CANReader::init()
+{
+    qDebug() << "CANReader::init()";
+   open(canBusDeviceName_);
+}
+
+void CANReader::open(QString iface)
+{
+    qDebug() << "CANReader::open()"<< iface;
     canBusDeviceName_ = iface;
     bool supportsSocketCan = false;
     foreach (const QByteArray &backend, QCanBus::instance()->plugins()) {
         if (backend == "socketcan") {
+            qDebug() << "SocketCan support found!";
             supportsSocketCan = true;
             break;
         }
@@ -23,6 +32,11 @@ void CANReader::open(QString iface){
     }
    device_ = QCanBus::instance()->createDevice("socketcan", canBusDeviceName_);
 
+   if (device_ == nullptr){
+       qDebug() << "Unable to create device!";
+       qDebug() << device_->errorString();
+       exit(1);
+   }
    if (!device_->connectDevice()){
        qDebug() << "Unable to connect!";
        qDebug() << device_->errorString();
@@ -54,6 +68,7 @@ void CANReader::saveSettings(){
 }
 
 void CANReader::readSettings(){
+    qDebug() << "CANReader::readSettings()";
     QSettings settings(Persistable::filename_, QSettings::IniFormat);
 
     settings.beginGroup(name_);
@@ -64,11 +79,14 @@ void CANReader::readSettings(){
     //A bit more error checking needed.
 
     if (parserType == "VPD3CANFrameParser") {
+        qDebug() << "Using VPD3CANFrameParser to parse";
         parser_ = new VPD3CANFrameParser();
         parser_->setSubject(subject);
         open(deviceName);
-    }
+    } else {
+        qDebug() << "Unknown parser:" << parserType;
 
+    }
 }
 
 void CANReader::receiveFrames(){
