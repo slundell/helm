@@ -20,10 +20,6 @@ QVector<Measurement> VPD3CANFrameParser::parse(const QCanBusFrame& frame){
     return m;
 }
 
-void VPD3CANFrameParser::setSubject(const QString& s){
-    subject_ = s;
-}
-
 QVector<Measurement> VPD3CANFrameParser::parseVolvoMessage(const VolvoMessage& vm){
     //qDebug() << "VPD3CANFrameParser:" << vm.toString();
 

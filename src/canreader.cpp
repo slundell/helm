@@ -1,5 +1,7 @@
 #include "canreader.h"
 #include <QDebug>
+#include <QSettings>
+#include "vpd3canframeparser.h"
 
 CANReader::CANReader()
 {

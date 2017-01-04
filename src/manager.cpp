@@ -1,6 +1,7 @@
 #include "manager.h"
 #include <QSettings>
 #include <QDebug>
+#include <QFileInfo>
 #include "sleekdoublegauge.h"
 #include "roundgauge.h"
 #include "sleekroundgauge.h"
@@ -63,8 +64,8 @@ void Manager::initUI(){
 }
 
 void Manager::showUI(){
-    if (settingsWindow_)
-        settingsWindow_->show();
+   /* if (settingsWindow_)
+        settingsWindow_->show();*/
 }
 
 void Manager::deleteComponent(const QString & c)
@@ -175,6 +176,12 @@ void Manager::load(const QString &name){
 
 void Manager::loadAll(){
     qDebug() << "Manager::loadAll()";
+    QFileInfo checker("helm.ini");
+    if (!checker.exists())
+        qDebug() << "File not found:" << checker.absolutePath();
+    else if (!checker.isFile())
+        qDebug() << "Not a file:" << checker.absolutePath();
+
     QSettings settings(Persistable::filename_, QSettings::IniFormat);
     QStringList groups = settings.childGroups();
     qDebug() << groups;

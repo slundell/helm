@@ -7,7 +7,7 @@
 quint8 HelmWidget::nameNum_ = 1;
 
 HelmWidget::HelmWidget(QWidget *parent) :
-    QWidget(parent, Qt::FramelessWindowHint)
+    QWidget(parent) //Qt::FramelessWindowHint)
 {
     name_ = QString("helmwidget_") + QString::number(nameNum_);
     nameNum_++;
@@ -17,6 +17,7 @@ HelmWidget::HelmWidget(QWidget *parent) :
 }
 
 void HelmWidget::init(){
+    setWindowFlags(Qt::Window);
     show();
 }
 
@@ -98,7 +99,7 @@ void HelmWidget::mouseDoubleClickEvent(QMouseEvent * e){
         qDebug() << "In edit mode";
     } else {
         saveSettings();
-        setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+        setWindowFlags(Qt::Window | Qt::Tool); //FramelessWindowHint);
         qDebug() << "Not in edit mode";
     }
 

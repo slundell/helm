@@ -8,8 +8,9 @@
 #include "canframeparser.h"
 #include "measurement.h"
 #include "volvomessage.h"
+#include "persistable.h"
 
-class CANReader : public Persistable, QObject
+class CANReader : public QObject, Persistable
 {
     Q_OBJECT
 
